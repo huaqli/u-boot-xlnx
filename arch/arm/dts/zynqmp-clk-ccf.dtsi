@@ -231,6 +231,22 @@
 	clocks = <&clk 59>, <&clk 31>;
 };
 
+&ttc0 {
+	clocks = <&clk 31>;
+};
+
+&ttc1 {
+	clocks = <&clk 31>;
+};
+
+&ttc2 {
+	clocks = <&clk 31>;
+};
+
+&ttc3 {
+	clocks = <&clk 31>;
+};
+
 &uart0 {
 	clocks = <&clk 56>, <&clk 31>;
 };
@@ -251,6 +267,10 @@
 	clocks = <&clk 75>;
 };
 
+&lpd_watchdog {
+	clocks = <&clk 75>;
+};
+
 &xilinx_ams {
 	clocks = <&clk 70>;
 };
@@ -265,4 +285,8 @@
 
 &zynqmp_dp_snd_codec0 {
 	clocks = <&clk 17>;
+};
+
+&pcap {
+	clocks = <&clk 41>;
 };

@@ -147,7 +147,12 @@
 #endif
 
 /* Total Size of Environment Sector */
-#define CONFIG_ENV_SIZE			(128 << 10)
+#ifdef CONFIG_ENV_IS_IN_EEPROM
+# define CONFIG_ENV_SIZE			CONFIG_SYS_EEPROM_SIZE
+# define CONFIG_EXTRA_ENV_SETTINGS
+#else
+# define CONFIG_ENV_SIZE			(128 << 10)
+#endif
 
 /* Allow to overwrite serial and ethaddr */
 #define CONFIG_ENV_OVERWRITE
@@ -365,16 +370,6 @@
 
 /* SPL part */
 #define CONFIG_SPL_FRAMEWORK
-
-/* FPGA support */
-#define CONFIG_SPL_FPGA_SUPPORT
-#define CONFIG_SPL_FPGA_LOAD_ADDR      0x1000000
-/* #define CONFIG_SPL_FPGA_BIT */
-#ifdef CONFIG_SPL_FPGA_BIT
-# define CONFIG_SPL_FPGA_LOAD_ARGS_NAME "download.bit"
-#else
-# define CONFIG_SPL_FPGA_LOAD_ARGS_NAME "fpga.bin"
-#endif
 
 /* MMC support */
 #ifdef CONFIG_MMC_SDHCI_ZYNQ

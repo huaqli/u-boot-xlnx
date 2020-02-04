@@ -46,8 +46,6 @@
 
 	gpio-keys {
 		compatible = "gpio-keys";
-		#address-cells = <1>;
-		#size-cells = <0>;
 		autorepeat;
 		sw19 {
 			label = "sw19";
@@ -336,6 +334,7 @@
 				temperature-stability = <50>;
 				factory-fout = <300000000>;
 				clock-frequency = <300000000>;
+				clock-output-names = "si570_user";
 			};
 		};
 		i2c@3 {
@@ -349,6 +348,7 @@
 				temperature-stability = <50>;
 				factory-fout = <156250000>;
 				clock-frequency = <148500000>;
+				clock-output-names = "si570_mgt";
 			};
 		};
 		i2c@4 {
@@ -630,19 +630,6 @@
 			slew-rate = <SLEW_RATE_SLOW>;
 			io-standard = <IO_STANDARD_LVCMOS18>;
 		};
-
-		mux-wp {
-			groups = "sdio1_wp_0_grp";
-			function = "sdio1_wp";
-		};
-
-		conf-wp {
-			groups = "sdio1_wp_0_grp";
-			bias-high-impedance;
-			bias-pull-up;
-			slew-rate = <SLEW_RATE_SLOW>;
-			io-standard = <IO_STANDARD_LVCMOS18>;
-		};
 	};
 
 	pinctrl_gpio_default: gpio-default {
@@ -684,7 +671,7 @@
 	status = "okay";
 	is-dual = <1>;
 	flash@0 {
-		compatible = "m25p80"; /* 32MB */
+		compatible = "m25p80", "spi-flash"; /* 32MB */
 		#address-cells = <1>;
 		#size-cells = <1>;
 		reg = <0x0>;
@@ -735,6 +722,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci1_default>;
 	no-1-8-v;
+	disable-wp;
 	xlnx,mio_bank = <1>;
 };
 
